@@ -38,9 +38,10 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: 'Build and push Docker image'
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@v3.2.0
       with:
         context: .
         push: true
-        tags: ${{ github.repository }}:latest
-        #,${{ github.repository }}:${{ env.IMAGE_TAG }}
+        tags: |
+          ${{ github.repository }}:latest
+          ${{ github.repository }}:${{ env.IMAGE_TAG }}
