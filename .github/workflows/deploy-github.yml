@@ -12,11 +12,16 @@ on:
     branches:
       - main
 
+env:
+  IMAGE_TAG: ${{ github.run_number }}
+
 
 jobs:
   build:
     name: 'Build and Push Docker Image'
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
 
     steps:
     - name: 'Checkout'
@@ -37,4 +42,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ github.repository }}:latest
+        tags: ${{ github.repository }}:latest,${{ github.repository }}:${{ env.IMAGE_TAG }}
