@@ -13,7 +13,7 @@ on:
       - main
 
 env:
-  IMAGE_NAME: 'test-python-api'
+  IMAGE_NAME: 'nelsonbn/test-python-api'
   IMAGE_TAG: ${{ github.run_number }}
 
 
@@ -38,17 +38,9 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-
-    - name: 'Debug Docker Credentials'
-      run: |
-        echo ${{ secrets.DOCKERHUB_USERNAME }}
-        echo ${{ secrets.DOCKERHUB_TOKEN }}
-        docker info
-      env:
-        DOCKER_CLI_EXPERIMENTAL: enabled
-
     - name: 'Build and push Docker image'
       uses: docker/build-push-action@v5
       with:
+        context: .
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }},${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+        tags: $${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }},${{ env.IMAGE_NAME }}:latest
