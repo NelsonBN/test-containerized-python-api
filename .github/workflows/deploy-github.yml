@@ -22,8 +22,8 @@ jobs:
   build:
     name: 'Build and Push Docker Image'
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
+    # permissions:
+    #   packages: write
 
     steps:
     - name: 'Checkout'
@@ -60,6 +60,3 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-        # tags: |
-        #   ${{ github.repository }}:latest
-        #   ${{ github.repository }}:${{ env.IMAGE_TAG }}
