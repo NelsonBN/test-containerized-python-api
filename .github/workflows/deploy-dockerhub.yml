@@ -38,6 +38,15 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+
+    - name: 'Debug Docker Credentials'
+      run: |
+        echo ${{ secrets.DOCKERHUB_USERNAME }}
+        echo ${{ secrets.DOCKERHUB_TOKEN }}
+        docker info
+      env:
+        DOCKER_CLI_EXPERIMENTAL: enabled
+
     - name: 'Build and push Docker image'
       uses: docker/build-push-action@v5
       with:
