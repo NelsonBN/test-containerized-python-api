@@ -46,11 +46,12 @@ jobs:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         tags: |
           ${{ env.IMAGE_TAG }}
+          latest
 
     - name: 'Show metadata'
       run: |
-        echo "${{ steps.meta.outputs.tags }}
-        echo "${{ steps.meta.outputs.labels }}"
+        echo "Show metadata"
+        echo "Tags: ${{ steps.meta.outputs.tags }}"
 
     - name: 'Build and push Docker image'
       uses: docker/build-push-action@v5
